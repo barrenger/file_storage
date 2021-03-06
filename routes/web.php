@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\FolderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('', 'FolderController');
+//Route::resource('', 'FileController');
+Route::resource('files', 'FileController');
+Route::resource('folders', 'FolderController');
+
+Route::post('store', [FileController::class, 'store']);
+Route::get('files/{id}', 'FileController@show')->name('files.show');
